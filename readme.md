@@ -12,10 +12,26 @@ export PATH=/path/to/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin:$PATH
 Replace `/path/to/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin` with the actual path to your cross-compiler.
 
 ## 2. Compiling the Kernel
-To compile the kernel, follow these steps:
+### 2.1. Enabling Full Preempt Kernel Using make menuconfig
+Run the following command to open the kernel configuration interface:
 ```
 source set_compiler.sh
 make ARCH_CFLAGS=-w bcm2709_navio2_defconfig
+make menuconfig
+```
+Navigate to the Preemption Model:
+Navigate to **General Setup** and select **Preemption Model**.
+
+Select Full Preempt:
+In the Preemption Model menu, select **Fully Preemptible Kernel (RT)**.
+This will set the following configuration options:
+```
+CONFIG_PREEMPT=y
+CONFIG_PREEMPT_RT=y
+```
+### 2.2. Compile the kernel
+To compile the kernel, follow these steps:
+```
 make Image modules dtbs -j8
 ```
 
