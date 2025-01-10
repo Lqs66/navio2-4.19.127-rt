@@ -16,7 +16,7 @@ Replace `/path/to/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin` with th
 Run the following command to open the kernel configuration interface:
 ```
 source set_compiler.sh
-make ARCH_CFLAGS=-w bcm2709_navio2_defconfig
+make bcm2709_navio2_defconfig
 make menuconfig
 ```
 Navigate to the Preemption Model:
@@ -32,7 +32,7 @@ CONFIG_PREEMPT_RT=y
 ### 2.2. Compile the kernel
 To compile the kernel, follow these steps:
 ```
-make Image modules dtbs -j8
+make ARCH_CFLAGS=-w Image modules dtbs -j8
 ```
 
 ## 3. Updating the Kernel on the Raspberry Pi SD Card
